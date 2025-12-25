@@ -1,0 +1,783 @@
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Jost';
+    display: flex;
+    overflow-x: hidden;
+}
+* {
+    box-sizing: border-box;
+}
+/* focus para accesibilidad */
+*:focus-visible {
+    outline: 3px solid #0056b3 !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 3px #0056b380 !important;
+    background-image: linear-gradient(#fff, #fff) !important;
+    color: #000 !important;
+}
+input:focus-visible,
+button:focus-visible,
+select:focus-visible {
+    border-color: #0056b3 !important;
+}
+
+.section-container-div {
+    width: 100%;
+    max-width: 1800px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+    place-content: center;
+    column-gap: 20px;
+}
+@media screen and (max-width: 800px) {
+    .section-container-div {
+        grid-template-columns: 1fr;
+    }
+}
+.section-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+}
+.title {
+    font-size: 1.5rem;
+}
+
+#main {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: conter;
+    margin-top: 100px;
+    flex-direction: column;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+.h1-title {
+    font-size: clamp(1rem, 4rem, 6rem);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-weight: 700;
+}
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+input {
+    border: none;
+    background-color: transparent;
+}
+section {
+    box-shadow: 0 0 25px #000;
+}
+input:focus {
+    outline: none;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+}
+.text {
+    text-align: center;
+    font-size: 1.2rem;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.shadow {box-shadow: 0 0 20px #000;}
+/*     HEADER RESPONSIVO CON MENÚ HAMBURGUESA     */
+.header-container {
+    position: fixed;
+    width: 100vw;
+    box-shadow: 0 0 25px #222;
+    border-bottom: 2px solid #aaa;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+    top: 0;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 1400px;
+    gap: 20px;
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.logo {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+}
+
+/* Controles principales siempre visibles */
+.main-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+/* Menú hamburguesa */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.menu-toggle:hover {
+    background-color: #f0f0f0;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 24px;
+}
+
+.hamburger span {
+    height: 3px;
+    width: 100%;
+    background-color: #333;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Controles del menú desplegable */
+.menu-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 2;
+    justify-content: center;
+}
+
+/* Estilos para controles de color */
+.color-controls-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#switch-button {
+    scale: 1.1;
+    border-radius: 100%;
+    padding: 10px 12px;
+    background: none;
+    border: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+#switch-button:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.15);
+}
+
+.color-control {
+    display: flex;
+    box-shadow: 0 0 10px #222;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #333;
+    height: 45px;
+    gap: 3px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.color-control > input {
+    width: 150px;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0 10px;
+}
+
+.color-indicator {
+    width: 35px;
+    height: 35px;
+    background-color: #000;
+    border: 1px solid #555;
+    border-radius: 100%;
+    margin: 0 5px;
+}
+
+.color-picker-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-left: 1px solid #000;
+}
+
+.color-picker-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.color-picker-label {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 12px;
+    background-color: #f0f0f0;
+    border-radius: 0 8px 8px 0;
+}
+
+.random-button {
+    background: linear-gradient(135deg, #000, #444);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    box-shadow: 0 0 20px #222;
+    padding: 10px 20px;
+    height: 45px;
+    min-width: 120px;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.random-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #333;
+}
+
+/* Controles secundarios en menú desplegable */
+.secondary-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.ratio-indicator-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 150px;
+}
+.ratio-indicator-div > div {
+    display: flex;
+    align-items: end;
+}
+
+.ratio-indicator-div h2 {
+    font-size: 1.1rem;
+    white-space: nowrap;
+}
+
+#select-main-elemets {
+    font-size: 1rem;
+    height: 45px;
+    padding: 0 15px;
+    border-radius: 10px;
+    width: 180px;
+    border: 2px solid #333;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#format-control {
+    width: 60px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 2px solid #333;
+    background-color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s;
+}
+
+#format-control:hover {
+    background-color: #f0f0f0;
+}
+
+/* Menú desplegable móvil */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-top: 1px solid #ddd;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 999;
+}
+
+.dropdown-menu.active {
+    display: flex;
+}
+
+.dropdown-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dropdown-section h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+.dropdown-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.element {
+    background-color: #858CBD;
+    color: #331915;
+}
+.invert {
+    background-color: #331915;
+    color: #858CBD;
+}
+
+/*  ESTILOS PARA NUEVAS SECCIONES  */
+
+/* Secciones generales */
+.section-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid currentColor;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Variables CSS para colores dinámicos */
+:root {
+    --element-color: #858CBD;
+    --invert-color: #331915;
+}
+
+.element {
+    background-color: var(--element-color);
+    color: var(--invert-color);
+    transition: background-color, color;
+    transition-duration: .15s;
+}
+
+.invert {
+    background-color: var(--invert-color);
+    color: var(--element-color);
+    transition: background-color, color;
+    transition-duration: .15s;
+}
+/* ESTILOS PARA EL FONDO ANIMADO*/
+.background-container {
+    height: 100vh;
+    top: -1000px;
+    position: fixed;
+    background-color: transparent;
+    z-index: -1;
+}
+.bg-title-right, .bg-title-left {
+    width: fit-content;
+    position: relative;
+    font-size: 14rem;
+    color: #888;
+    transform: rotate(-30deg);
+    text-wrap: nowrap;
+    font-family: 'Jost';
+    margin: 0;
+    padding: 0;
+    opacity: .2;
+    font-weight: bolder;
+}
+.bg-title-right {animation: slide-right;}
+.bg-title-left {animation: slide-left;}
+
+.bg-title-right, .bg-title-left {
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-delay: 0;
+}
+.main-bg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@keyframes slide-right {
+    0% {
+        top: 0;
+        left: 0;
+    }
+    100% {
+        top: -780.5px;
+        left: 1351.86565531px;
+    }
+}
+@keyframes slide-left {
+    0% {
+        top: 0;
+        left: 0;
+    }
+    100% {
+        top: 780.5px;
+        left: -1351.86565531px;
+    }
+}
+/*ANIMACIONES*/
+
+@keyframes float-y {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes float-x {
+    0% {
+        transform: translateX(0);
+        scale: 2;
+    }
+    50% {
+        scale: 2.5;
+        transform: translateX(-10px);
+    }
+    100% {
+        scale: 2;
+        transform: translateX(0);
+    }
+}
+
+/*        SECCION DE ACERCA DEL DESARROLLADOR          */
+
+.developer-section {
+    border-radius: 15px;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+}
+.developer-section > img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    border: 2px solid currentColor;
+}
+.developer-text {
+    text-align: center;
+}
+.dev-icons {
+    margin: 0;
+    padding: 0;
+    gap: 40px;
+    height: 50px;
+}
+.dev-icons > a{
+    margin: 10px;
+}
+
+/* MEDIA QUERIES PARA HEADER RESPONSIVO */
+
+/* pantallas grandes (escritorio) */
+@media (min-width: 1025px) {
+    .secondary-controls {
+        display: flex !important;
+    }
+    
+    .dropdown-menu {
+        display: none !important;
+    }
+    
+    .menu-toggle {
+        display: none !important;
+    }
+}
+
+/* Tablets y pantallas medianas */
+@media (max-width: 1024px) {
+    .header {
+        flex-wrap: wrap;
+        padding: 10px 15px;
+    }
+    
+    .menu-controls {
+        flex: 1;
+        justify-content: flex-end;
+    }
+    
+    .secondary-controls {
+        display: none;
+    }
+    
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .color-control {
+        min-width: 180px;
+    }
+    
+    .color-control > input {
+        width: 120px;
+    }
+}
+
+/* celulares grandes */
+@media (max-width: 768px) {
+    .page aside {
+        display: none;
+    }
+    .header {
+        padding: 8px 10px;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .logo-container h2 {
+        font-size: 1.2rem;
+    }
+    
+    .main-controls {
+        gap: 10px;
+    }
+    
+    .color-controls-container {
+        gap: 5px;
+    }
+    
+    .color-control {
+        min-width: 150px;
+        height: 40px;
+    }
+    
+    .color-control > input {
+        width: 100px;
+        font-size: 0.9rem;
+    }
+    
+    .color-indicator {
+        width: 30px;
+        height: 30px;
+    }
+    
+    #switch-button {
+        padding: 8px 10px;
+    }
+    
+    .random-button {
+        padding: 8px 15px;
+        height: 40px;
+        min-width: 100px;
+        font-size: 1rem;
+    }
+    
+    .dropdown-menu {
+        padding: 15px;
+    }
+    
+    .dropdown-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    #select-main-elemets,
+    #format-control,
+    .ratio-indicator-div {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+/* celulares pequeños */
+@media (max-width: 480px) {
+    .h1-title {
+        font-size: 2.5rem;
+    }
+    .header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 5px;
+    }
+    
+    .logo-container {
+        width: 100%;
+        justify-content: space-evenly;
+        padding: 0 20px;
+    }
+    
+    .menu-toggle {
+        order: 1;
+    }
+    
+    .main-controls {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .color-controls-container {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .color-control {
+        min-width: 140px;
+        max-width: 48%;
+    }
+    
+    .color-control > input {
+        width: 80px;
+    }
+    
+    #switch-button {
+        order: -1;
+        margin: 0 5px;
+    }
+    
+    .random-button {
+        width: 100%;
+        max-width: 200px;
+        margin-top: 5px;
+    }
+    
+    .hamburger {
+        width: 20px;
+    }
+    
+    .hamburger span {
+        height: 2px;
+    }
+    
+    #main {
+        margin-top: 120px;
+    }
+}
+
+/* media queries para secciones generales */
+@media (max-width: 768px) {
+    .header-container {
+        width: 100%;
+    }
+    #main {
+        margin-top: 180px;
+        display: flex ;
+        justify-content: center ;
+        align-items: center ;
+    }
+    .section-header h2 {
+        font-size: 1.8rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .color-control {
+        min-width: 120px;
+    }
+    
+    .color-control > input {
+        width: 70px;
+        font-size: 0.8rem;
+    }
+    
+    .color-picker-label {
+        padding: 0 8px;
+    }
+    
+    .random-button {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

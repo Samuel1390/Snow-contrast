@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="author" content="Samuel Nelo">
+    <meta name="description" content="Snow Contrast es una herramienta gratuita para generar y probar
+    combinaciones de colores con alto contraste, asegurando la accesibilidad web según las pautas WCAG 2.1.
+    Ideal para diseñadores y desarrolladores web.">
+    <meta name="title" content="Snow contrast">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Snow Contrast – Generador de Colores con Alto Contraste">
+    <meta property="og:description" content="Herramienta gratuita para crear y probar combinaciones de colores accesibles para tu web.">
+    <meta property="og:image" content="https://samuel1390.github.io/Snow-contrast/snow-contrast-imgs/logo-social.jpg">
+    <meta property="og:url" content="https://samuel1390.github.io/Snow-contrast/">
+    <meta property="og:type" content="website">
+    <meta name="keywords" content="generador de colores, colores contrastados, contraste de color, snow contrast,
+    generador de colores aleatorios, prueba de contraste">
+    <link rel="apple-touch-icon" sizes="180x180" href="snow-contrast-imgs/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="snow-contrast-imgs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="snow-contrast-imgs/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="sections.css">
+    <title>Snow Contrast | Generador de Colores con Alto Contraste para Accesibilidad Web</title>
+</head>
+<body>
+    <div class="header-container">
+        <header class="header">
+            <div class="logo-container">
+                <img loading="lazy" src="./snow-contrast-imgs/logo.jfif" class="logo" alt="logo de Snow Contrast">
+                <h2 class="header-title">Snow Contrast</h2>
+                
+                <!-- Botón menu hamburguesa para celulares -->
+                <button aria-expanded="false" aria-controls="dropdownMenu" class="menu-toggle" id="menuToggle">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Controles principales (siempre visibles -->
+            <div class="main-controls">
+                <!-- Controles de color -->
+                <div class="color-controls-container">
+                    <!-- PRIMER CONTROL DE COLOR -->
+                    <div class="color-control">
+                        <input type="text" aria-label="escribe el primer color" value="#000000" id="input-color-1">
+                        <div class="color-indicator" id="color-indicator-1"></div>
+                        <div class="color-picker-wrapper" aria-label="seleccion manual del primer color">
+                            <label for="color-1" class="color-picker-label">
+                                <span class="material-symbols-outlined">colorize</span>
+                            </label>
+                            <input type="color" id="color-1" class="color-picker-input">
+                        </div>
+                    </div>
+
+                    <button id="switch-button" aria-label="boton para intercambiar los colores actuales">
+                        <span class="material-symbols-outlined">compare_arrows</span>
+                    </button>
+                    
+                    <!-- SEGUNDO CONTROL DE COLOR -->
+                    <div class="color-control">
+                        <input type="text" name="" value="#000000" aria-label="ingresa el segundo color" id="input-color-2">
+                        <div class="color-indicator" id="color-indicator-2"></div>
+                        <div class="color-picker-wrapper">
+                            <label for="color-2" class="color-picker-label" aria-label="seleccion manual del segundo control">
+                                <span class="material-symbols-outlined">colorize</span>
+                            </label>
+                            <input type="color" id="color-2" class="color-picker-input">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Boton random del header-->
+                <button class="random-button" aria-label="boton para generar colores aleatorios">Random</button>
+            </div>
+
+            <!-- controles secundarios (visibles en desktop, ocultos en móvil) -->
+            <div class="secondary-controls">
+                <div class="ratio-indicator-div">
+                    <h3 class="text">Radio de contraste</h3>
+                    <div class="container" style="padding: 0;">
+                        <strong class="ratio-indicator text" aria-label='radio de contraste'>0.00</strong>
+                        <h3 style="margin-left: 10px;" class="section-subtitle ratio-indicator-text text">---</h3>
+                    </div>
+                </div>
+                
+                <div id="format-control" style="width: 60px;" aria-label="control de formato de control" class="container color-control text">
+                    #
+                </div>
+            </div>
+        </header>
+
+        <!-- menu desplegable para celulares -->
+        <div class="dropdown-menu" role="menu" id="dropdownMenu" aria-label="menú desplegable para celulares">
+            <div class="dropdown-section">
+                <h3>Controles adicionales</h3>
+                <div class="dropdown-controls">
+                    <div class="ratio-indicator-div">
+                        <h3 class="text">Radio de contraste</h3>
+                        <div class="container" style="padding: 0;">
+                            <span aria-label="radio de contraste" class="ratio-indicator text">0.00</span>
+                            <h3 style="margin-left: 10px;" class="ratio-indicator-text text"></h3>
+                        </div>
+                    </div>
+                    
+                    <div id="format-control-mobile" style="width: 60px;" class="container color-control text">
+                        #
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--MAIN-->
+    <main id="main">
+        <div class="main-bg">
+        <section class="page" aria-label="Demostración visual de combinaciones de colores">
+            <div class="main-page-container element">
+                <div class="page-header invert">
+                    <div class="logo-container">
+                        <img loading="lazy" src="./snow-contrast-imgs/logo.jfif" class="logo" alt="logo de snow contrast">
+                        <h2 class="header-title subtitle">Snow Contrast</h2>
+                    </div>
+                    <!--HEADER DE LA PAGINA PRINCIPAL-->
+                    <nav class="main-page-nav">
+                        <ul class="main-page-ul">
+                            <li class="main-page-li">
+                                <a href="">Inicio</a>
+                            </li>
+                            <li class="main-page-li">
+                                <a href="">Acerca de</a>
+                            </li>
+                            <li class="main-page-li">
+                                <a href="">Servicios</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+                <div style="display: flex; height: 100%;">
+                    <!--ASIDE DE LA PAGINA PRINCIPAL-->
+                    <aside class="main-page-aside invert">
+                        <h3 style="margin-top: 20px; text-align: center;" class="subtitle">Menú</h3>
+                        <nav class="page-aside-nav">
+                            <ul class="main-page-ul colum">
+                                <li class="main-page-li">
+                                    <a href="">Inicio<span class="material-symbols-outlined">arrow_forward</span></a>
+                                </li>
+                                <li class="main-page-li">
+                                    <a href="">Acerca de<span class="material-symbols-outlined">arrow_forward</span></a>
+                                </li>
+                                <li class="main-page-li">
+                                    <a href="">Servicios <span class="material-symbols-outlined">arrow_forward</span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </aside>
+                    <!--TEXTO PRINCIPAL-->
+                    <div aria-label="texto de la pagina principal, como recordatorio: los botones no son interactivos solo estan para visualizar los resultados" class="page-container element colum">
+                        <div class="page-text">
+                            <h1 class="h1-title">Snow Contrast</h1>
+                                <p class="text">Genera dos colores contrastados y observa los resultados en tiempo real, ideal para darle vida a tu pagina web y difereciarte de la competencia.</p>
+                            <div class="try-it">
+                                <h2 class="subtitle">Pruébalo</h2>
+                                <span class="material-symbols-outlined arrow-left">keyboard_double_arrow_right</span>
+                                <button class="random-button shadow">Random</button>
+                            </div>
+                        </div>
+                        <!-- DESARROLLADOR -->
+                        <div class="developer">
+                        <img loading="lazy" src="https://avatars.githubusercontent.com/u/195463641?v=4" alt="desarrollador Samuel Nelo">
+                        <h2 class="text element">Desarrollador: <a class="invert" target="_blank" rel="noopener" href="https://github.com/Samuel1390">Samuel Nelo</a></h2>
+                    </div>
+                    </div>
+
+                <!-- REDES SOCIALES-->
+                    <div class="container icons-container">
+                        <a href="https://github.com/Samuel1390" target="_blank" rel="noopener">
+                            <img loading="lazy" class="icon" height="32" width="32" alt="icono de github" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/github.svg" />
+                        </a>
+                        <!--
+                        <a href="" target="_blank" rel="noopener">
+                            <img loading="lazy" class="icon" height="32" width="32" src="https://unpkg.com/simple-icons@v16/icons/instagram.svg" />
+                        </a>
+                        -->
+                        <a href="https://wa.me/+584125053991" target="_blank" rel="noopener">
+                            <img loading="lazy" class="icon" height="32" width="32" alt="logo de whatsapp" src="https://unpkg.com/simple-icons@v16/icons/whatsapp.svg" />
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <!-- NUEVAS SECCIONES AÑADIDAS -->
+        <div class="section-container-div">
+            <!-- Sección de Login -->
+            <section style="box-shadow: 0 0 25px #000;" class="section-container element" id="login-section">
+                <div class="section-header invert">
+                    <h2><span class="material-symbols-outlined">person</span> Iniciar Sesión</h2>
+                    <p class="section-subtitle">Accede a tu cuenta para guardar tus paletas favoritas</p>
+                </div>
+                <div class="login-container">
+                    <form class="login-form invert" id="loginForm">
+                        <div class="form-group">
+                            <label for="username">Usuario o Email</label>
+                            <div class="input-with-icon">
+                                <span class="material-symbols-outlined">person</span>
+                                <input type="text" id="username" class="shadow-invert" placeholder="tu@email.com" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <div class="input-with-icon">
+                                <span class="material-symbols-outlined">lock</span>
+                                <input type="password" class="shadow-invert" id="password" placeholder="Ingresa tu contraseña" required>
+                                <button type="button"  class="show-password">
+                                    <span class="material-symbols-outlined" id="showPassword">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="remember">
+                                <span class="checkmark"></span>
+                                Recordarme
+                            </label>
+                            <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                        </div>
+                        
+                        <button type="submit" class="submit-button shadow-invert">
+                            <span class="material-symbols-outlined">login</span>
+                            Ingresar
+                        </button>
+                        
+                        <div class="form-footer">
+                            <p>¿No tienes cuenta? <a href="#" id="registerLink">Regístrate aquí</a></p>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            
+            <!-- Sección de Reproductor de musica -->
+            <section style="box-shadow: 0 0 25px #000;" class="section-container element" id="music-section">
+                <div class="music-player">
+                    <div class="now-playing invert">
+                        <div class="album-art">
+                            <img loading="lazy" class="shadow-invert" alt="portada de cancion" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop">
+                            <div class="vinyl-effect"></div>
+                        </div>
+                        
+                        <div class="track-info">
+                            <h3 id="currentTrack">Chill Vibes - Lofi Beats</h3>
+                            <p id="currentArtist">Snow Contrast Studio</p>
+                            <div class="progress-container">
+                                <span id="currentTime">0:42</span>
+                                <div class="progress-bar" id="progressBar">
+                                    <div class="progress" id="progress"></div>
+                                </div>
+                                <span id="duration">3:45</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-controls">
+                        <button class="control-btn" id="prevBtn">
+                            <span class="material-symbols-outlined">skip_previous</span>
+                        </button>
+                        <button class="control-btn play-btn shadow" id="playBtn">
+                            <span class="material-symbols-outlined" id="playIcon">play_arrow</span>
+                        </button>
+                        <button class="control-btn" id="nextBtn">
+                            <span class="material-symbols-outlined">skip_next</span>
+                        </button>
+                        
+                        <div class="volume-control">
+                            <span class="material-symbols-outlined">volume_up</span>
+                            <input type="range" min="0" max="100" value="70" class="volume-slider" id="volumeSlider">
+                        </div>
+                    </div>
+                    
+                    <div class="playlist element">
+                        <h2><span class="material-symbols-outlined">queue_music</span> Playlist</h2>
+                        <div class="playlist-tracks">
+                            <div class="track active shadow" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+                                <span class="track-number">1</span>
+                                <div class="track-details">
+                                    <h3>Creative Flow</h3>
+                                    <p>Lofi Study Beats • 3:24</p>
+                                </div>
+                                <span class="material-symbols-outlined">play_circle</span>
+                            </div>
+                            
+                            <div class="track shadow" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+                                <span class="track-number">2</span>
+                                <div class="track-details">
+                                    <h3>Design Dreams</h3>
+                                    <p>Ambient Focus • 4:12</p>
+                                </div>
+                                <span class="material-symbols-outlined">play_circle</span>
+                            </div>
+                            
+                            <div class="track shadow" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">
+                                <span class="track-number">3</span>
+                                <div class="track-details">
+                                    <h3>Color Waves</h3>
+                                    <p>Chillhop • 3:45</p>
+                                </div>
+                                <span class="material-symbols-outlined">play_circle</span>
+                            </div>
+                            
+                            <div class="track shadow" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3">
+                                <span class="track-number">4</span>
+                                <div class="track-details">
+                                    <h3>Pixel Perfect</h3>
+                                    <p>Jazz Lofi • 3:58</p>
+                                </div>
+                                <span class="material-symbols-outlined">play_circle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sección de calendario -->
+            <section style="box-shadow: 0 0 25px #000;" class="section-container invert">
+                <div class="calendar-container">
+                    <div class="calendar-header element">
+                        <h2 class="title task-time">Hoy es 
+                            <span class="day">Lunes</span>
+                            <span class="material-symbols-outlined" style="scale: 1.2;">calendar_today</span>
+                            <span class="time">1/01/2025</span></h2>
+                    </div>
+                    <div class="task-grid element">
+                        <div class="task-grid-item back-shadow">
+                            <span class="material-symbols-outlined task-icon">
+                                favorite
+                            </span>
+                            <h3 class="subtitle">Dios</h3>
+                            <h3 class="text">5:00 am</h3>
+                        </div>
+                        <div class="task-grid-item back-shadow">
+                            <span class="material-symbols-outlined task-icon">fitness_center</span>
+                            <h3 class="subtitle">Gimnasio</h3>
+                            <h3 class="text">6:00 am</h3>
+                        </div>
+                        <div class="task-grid-item back-shadow">
+                            <span class="material-symbols-outlined task-icon">restaurant</span>
+                            <h3 class="subtitle">Desayuno</h3>
+                            <h3 class="text">7:30 am</h3>
+                        </div>
+                        <div class="task-grid-item back-shadow">
+                            <span class="material-symbols-outlined task-icon">code</span>
+                            <h3 class="subtitle">Código</h3>
+                            <h3 class="text">8:00 am</h3>
+                        </div>
+                        <div class="task-grid-item back-shadow">
+                            <span class="material-symbols-outlined task-icon">book_2</span>
+                            <h3 class="subtitle">Estudiar</h3>
+                            <h3 class="text">1:00 pm</h3>
+                        </div>
+                        <div class="task-grid-item back-shadow">
+                            <span class="material-symbols-outlined task-icon">bed</span>
+                            <h3 class="subtitle">Dormir</h3>
+                            <h3 class="text">9:00 pm</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section-container element" style="box-shadow: 0 0 25px #000;">
+                <div class="sugestions-container">
+                    <div class="sugestions-header invert">
+                        <h2 class="title" style="font-size: 2rem;">Sugerencias de contraste</h2>
+                        <p class="text">Prueba estos geniales combos de colores</p>
+                    </div>
+                </div>
+                <div class="sugestions-grid" aria-label="tabla de sugerencias de colores">
+                    <div class="sugestions-item" style="flex-direction: row;" aria-label="aplicar combinacion de colores café">
+                        <div class="sugestion-color" style="background-color: #3B280C;"></div>
+                        <div class="sugestion-color" style="background-color: #EEC681;"></div>
+                    </div>
+                    <button aria-label="aplicar combinacion de colores coffee" class="sugestion-name invert shadow">
+                        <h3 class="title">Coffee</h3>
+                    </button>
+                    <div class="sugestions-item" style="flex-direction: row;" aria-label="aplicar combinacion de colores rosa">
+                        <div class="sugestion-color" style="background-color: #061028;"></div>
+                        <div class="sugestion-color" style="background-color: #F47C7C;"></div>
+                    </div>
+                    <button aria-label="aplicar combinacion de colores rose" class="sugestion-name invert shadow">
+                        <h3 class="title">Rose</h3>
+                    </button>
+                    <div aria-label="aplicar combinacion de colores Voltage" class="sugestions-item" style="flex-direction: row;">
+                        <div class="sugestion-color" style="background-color: #3C3E38;"></div>
+                        <div class="sugestion-color" style="background-color: #C6FF4D;"></div>
+                    </div>
+                    <button aria-label="aplicar combinacion de colores Voltage" class="sugestion-name invert shadow">
+                        <h3 class="title">Voltage</h3>
+                    </button>
+                    <div aria-label="aplicar combinacion de colores metálico" class="sugestions-item" style="flex-direction: row;">
+                        <div class="sugestion-color" style="background-color: #000000;"></div>
+                        <div class="sugestion-color" style="background-color: #c4c4c4;"></div>
+                    </div>
+                    <button class="sugestion-name invert shadow">
+                        <h3 aria-label="aplicar combinacion de colores metálico" class="title">Metallic</h3>
+                    </button>
+                    <div aria-label="aplicar combinacion de colores jardín" class="sugestions-item" style="flex-direction: row;">
+                        <div class="sugestion-color" style="background-color: #2F2B04;"></div>
+                        <div class="sugestion-color" style="background-color: #CDE675;"></div>
+                    </div>
+                    <button class="sugestion-name invert shadow">
+                        <h3 aria-label="aplicar combinacion de colores jardín" class="title">Garden</h3>
+                    </button>
+                    <div aria-label="aplicar combinacion de colores lavanda" class="sugestions-item" style="flex-direction: row;">
+                        <div class="sugestion-color" style="background-color: #1D031B;"></div>
+                        <div class="sugestion-color" style="background-color: #C0C4F0;"></div>
+                    </div>
+                    <button aria-label="aplicar combinacion de colores lavanda" class="sugestion-name invert shadow">
+                        <h3 class="title">Lavender</h3>
+                    </button>
+                    <div aria-label="aplicar combinacion de colores bosque" lass="sugestions-item" style="flex-direction: row;">
+                        <div class="sugestion-color" style="background-color: #000000;"></div>
+                        <div class="sugestion-color" style="background-color: #009E5A;"></div>
+                    </div>
+                    <button aria-label="aplicar combinacion de colores bosque" class="sugestion-name invert shadow">
+                        <h3 class="title">Forest</h3>
+                    </button>
+                </div>
+            </section>
+            <!-- Sección de gráfico de cadio de contraste -->
+<section aria-label="Sección de gráfico de cadio de contraste" style="box-shadow: 0 0 25px #000;"  class="element section-container">
+    <div class="chart-container shadow">
+        <div class="chart-header">
+            <h2><span class="material-symbols-outlined">insights</span> Radio de contraste</h2>
+            <p class="section-subtitle">Información adicional acerca de el radio de contraste recomendado por WCAG 2.1</p>
+        </div>
+        
+        <div class="chart-wrapper">
+            <!-- Grafico circular -->
+            <div class="circular-chart" aria-label="Gráfico circular que muestra el ratio de contraste actual">
+                <svg viewBox="0 0 36 36" class="circular-chart-svg">
+                    <!-- Fondo del circulo (gris claro) -->
+                    <path class="circle-bg"
+                        d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke="#666"
+                        stroke-width="3.8"/>
+                    
+                    <!-- círculo de progreso (negro) -->
+                    <path class="circle-progress"
+                        d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none"
+                        stroke="#000000"
+                        stroke-width="3.8"
+                        stroke-dasharray="0, 100"
+                        stroke-linecap="round"/>
+                    
+                    <!-- Texto en el centro -->
+                    <text x="18" y="20.35" class="chart-value" text-anchor="middle">0.00</text>
+                    <text x="18" y="25" class="chart-label" text-anchor="middle" fill="#333333">Ratio</text>
+                </svg>
+            </div>
+            
+            <!-- Indicadores de nivel -->
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ff4d4d;"></div>
+                    <span>Muy bajo (&lt;4.5)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ffcc00;"></div>
+                    <span>Aceptable (4.5-6)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #b8d432;"></div>
+                    <span>Bien (6-9)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #00cc66;"></div>
+                    <span>Excelente (9-21)</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Información adicional -->
+        <div class="chart-info">
+            <div class="info-item">
+                <span class="material-symbols-outlined">info</span>
+                <p>El ratio mínimo recomendado por WCAG 2.1 para texto normal es <strong>4.5:1</strong></p>
+            </div>
+            <div class="info-item">
+                <span class="material-symbols-outlined">visibility</span>
+                <p>Para texto grande (18px+), el mínimo es <strong>3:1</strong></p>
+            </div>
+            <div class="info-item">
+                <span class="material-symbols-outlined">star</span>
+                <p>Un ratio de <strong>7:1</strong> o superior es ideal para máxima legibilidad</p>
+            </div>
+            </div>
+            </div>
+        </section>
+        <section class="section-container element" style="box-shadow: 0 0 25px #000;">
+            <div class="developer-section invert shadow">
+                <h2>Acerca del Desarrollador</h2>
+                <img loading="lazy" class="shadow-invert" src="https://avatars.githubusercontent.com/u/195463641?v=4" alt="foto de Samuel Nelo, desarrollador de snow contrast">
+                <div class="developer-text">
+                    <h3 class="title" title="desarrollador">Samuel Nelo</h3>
+                    <p style="font-size: 1.2rem;">Soy un programador enfocado al frontend y me dedico a hacer páginas web a negocios locales y herramientas
+                        para programadores como esta. Si te gusta mi trabajo, puedes enviarme un whatsapp y contarme como seria tu
+                        sitio web ideal para tu negocio o emprendimiento, y si quieres ver más proyectos como este puedes visitar mi
+                        github
+                    </p>
+                </div>
+                <div class="icons-container dev-icons">
+                    <a href="https://github.com/Samuel1390" target="_blank" rel="noopener" aria-label="enlace al github de Samuel Nelo">
+                        <img loading="lazy" class="icon" height="64" width="64" alt="icono de github" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/github.svg" />
+                    </a>
+                    <!--
+                        <a href="" target="_blank" rel="noopener">
+                            <img loading="lazy" class="icon" height="32" width="32" alt="icono de instagram" src="https://unpkg.com/simple-icons@v16/icons/instagram.svg" />
+                        </a>
+                        -->
+                        <a href="https://wa.me/+584125053991" target="_blank" aria-label="enlace al whatsapp de Samuel Nelo" rel="noopener">
+                            <img loading="lazy" class="icon" height="64" width="64" alt="icono de whatsapp" src="https://unpkg.com/simple-icons@v16/icons/whatsapp.svg" />
+                        </a>
+                </div>
+            </div>
+        </section>
+        </div>
+        <div class="background-container">
+            <div style="animation-duration: 17s;" class="bg-title-right">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 18s;" class="bg-title-left">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 21s;" class="bg-title-right">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 20s;" class="bg-title-left">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 23s;" class="bg-title-right">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 15s;" class="bg-title-left">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 20s;" class="bg-title-right">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 21s;" class="bg-title-left">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 18s;" class="bg-title-right">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 17s;" class="bg-title-left">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 21s;" class="bg-title-right">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 25s;" class="bg-title-left">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 20s;" class="bg-title-right">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+            <div style="animation-duration: 19s;" class="bg-title-left">Snow Contrast Snow Contrast Snow Contrast Snow Contrast </div>
+        </div>
+    </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="scripts.js"></script>
+    <script src="burger-menu.js"></script>
+</body>
+</html>
