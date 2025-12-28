@@ -2,31 +2,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!--metatags mas importantes-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="author" content="Samuel Nelo">
-    <meta name="google-site-verification" content="bJdJTpD56n8og-fdHcozRUHohQ_fZL5mSq8bbLejTaA" />
     <meta name="description" content="Snow Contrast es una herramienta gratuita para generar y probar
     combinaciones de colores con alto contraste, asegurando la accesibilidad web según las pautas WCAG 2.1.
     Ideal para diseñadores y desarrolladores web.">
     <meta name="title" content="Snow contrast">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Snow Contrast – Generador de Colores con Alto Contraste">
-    <meta property="og:description" content="Herramienta gratuita para crear y probar combinaciones de colores accesibles para tu web.">
-    <meta property="og:image" content="https://samuel1390.github.io/Snow-contrast/snow-contrast-imgs/logo-social.jpg">
-    <meta property="og:url" content="https://samuel1390.github.io/Snow-contrast/">
-    <meta property="og:type" content="website">
     <meta name="keywords" content="generador de colores, colores contrastados, contraste de color, snow contrast,
     generador de colores aleatorios, prueba de contraste">
+    <!--REDES SOCIALES-->
+    <meta property="og:title" content="Snow Contrast - Generador de Colores con Alto Contraste">
+    <meta property="og:description" content="Herramienta gratuita para crear y probar combinaciones de colores accesibles para tu web.">
+    <meta property="og:image" content="https://samuel1390.github.io/Snow-contrast/snow-contrast-imgs/android-chrome-192x192.png">
+    <meta property="og:url" content="https://samuel1390.github.io/Snow-contrast/">
+    <meta property="og:type" content="website">
+    <!-- Configuración para Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@tu_usuario">
+    <meta name="twitter:title" content="Snow Contrast - Generador de Colores con Alto Contraste">
+    <meta name="twitter:description" content="Herramienta gratuita para crear y probar combinaciones de colores accesibles para tu web.">
+    <meta name="twitter:image" content="https://samuel1390.github.io/Snow-contrast/snow-contrast-imgs/android-chrome-192x192.png">
+    <meta name="twitter:image:alt" content="Logo de snow Contrast">
+    <!--fav icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="snow-contrast-imgs/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="snow-contrast-imgs/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="snow-contrast-imgs/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://samuel1390.github.io/Snow-contrast/snow-contrast-imgs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://samuel1390.github.io/Snow-contrast/snow-contrast-imgs/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <!--fuentes e iconos usados en el proyecto-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!--estilos-->
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="sections.css">
     <title>Snow Contrast | Generador de Colores con Alto Contraste para Accesibilidad Web</title>
@@ -91,7 +102,7 @@
                     <h3 class="text">Radio de contraste</h3>
                     <div class="container" style="padding: 0;">
                         <strong class="ratio-indicator text" aria-label='radio de contraste'>0.00</strong>
-                        <h3 style="margin-left: 10px;" class="section-subtitle ratio-indicator-text text">---</h3>
+                        <h3 class="section-subtitle ratio-indicator-text text">---</h3>
                     </div>
                 </div>
                 
@@ -209,7 +220,7 @@
             <section style="box-shadow: 0 0 25px #000;" class="section-container element" id="login-section">
                 <div class="section-header invert">
                     <h2><span class="material-symbols-outlined">person</span> Iniciar Sesión</h2>
-                    <p class="section-subtitle">Accede a tu cuenta para guardar tus paletas favoritas</p>
+                    <p class="section-subtitle">Accede a tu cuenta para guardar tus pares favoritos</p>
                 </div>
                 <div class="login-container">
                     <form class="login-form invert" id="loginForm">
@@ -288,7 +299,7 @@
                         
                         <div class="volume-control">
                             <span class="material-symbols-outlined">volume_up</span>
-                            <input type="range" min="0" max="100" value="70" class="volume-slider" id="volumeSlider">
+                            <input type="range" min="0" max="100" value="70" class="element volume-slider" id="volumeSlider">
                         </div>
                     </div>
                     
@@ -383,7 +394,7 @@
             <section class="section-container element" style="box-shadow: 0 0 25px #000;">
                 <div class="sugestions-container">
                     <div class="sugestions-header invert">
-                        <h2 class="title" style="font-size: 2rem;">Sugerencias de contraste</h2>
+                        <h2 class="title" >Sugerencias de contraste</h2>
                         <p class="text">Prueba estos geniales combos de colores</p>
                     </div>
                 </div>
@@ -430,7 +441,7 @@
                     <button aria-label="aplicar combinacion de colores lavanda" class="sugestion-name invert shadow">
                         <h3 class="title">Lavender</h3>
                     </button>
-                    <div aria-label="aplicar combinacion de colores bosque" lass="sugestions-item" style="flex-direction: row;">
+                    <div aria-label="aplicar combinacion de colores bosque" class="sugestions-item" style="flex-direction: row;">
                         <div class="sugestion-color" style="background-color: #000000;"></div>
                         <div class="sugestion-color" style="background-color: #009E5A;"></div>
                     </div>
@@ -440,11 +451,11 @@
                 </div>
             </section>
             <!-- Sección de gráfico de cadio de contraste -->
-<section aria-label="Sección de gráfico de cadio de contraste" style="box-shadow: 0 0 25px #000;"  class="element section-container">
+<section aria-label="Sección de gráfico de radio de contraste" style="box-shadow: 0 0 25px #000;"  class="element section-container">
     <div class="chart-container shadow">
         <div class="chart-header">
             <h2><span class="material-symbols-outlined">insights</span> Radio de contraste</h2>
-            <p class="section-subtitle">Información adicional acerca de el radio de contraste recomendado por WCAG 2.1</p>
+            <p class="section-subtitle" style="color: #0009;">Información adicional acerca de el radio de contraste recomendado por WCAG 2.1</p>
         </div>
         
         <div class="chart-wrapper">
@@ -458,16 +469,16 @@
                         a 15.9155 15.9155 0 0 1 0 -31.831"
                         fill="none"
                         stroke="#666"
-                        stroke-width="3.8"/>
+                        stroke-width="3.2"/>
                     
-                    <!-- círculo de progreso (negro) -->
+                    <!-- círculo de progreso (de color correspondiente) -->
                     <path class="circle-progress"
                         d="M18 2.0845
                         a 15.9155 15.9155 0 0 1 0 31.831
                         a 15.9155 15.9155 0 0 1 0 -31.831"
                         fill="none"
                         stroke="#000000"
-                        stroke-width="3.8"
+                        stroke-width="3.2"
                         stroke-dasharray="0, 100"
                         stroke-linecap="round"/>
                     
@@ -521,7 +532,7 @@
                 <img loading="lazy" class="shadow-invert" src="https://avatars.githubusercontent.com/u/195463641?v=4" alt="foto de Samuel Nelo, desarrollador de snow contrast">
                 <div class="developer-text">
                     <h3 class="title" title="desarrollador">Samuel Nelo</h3>
-                    <p style="font-size: 1.2rem;">Soy un programador enfocado al frontend y me dedico a hacer páginas web a negocios locales y herramientas
+                    <p>Soy un programador enfocado al frontend y me dedico a hacer páginas web a negocios locales y herramientas
                         para programadores como esta. Si te gusta mi trabajo, puedes enviarme un whatsapp y contarme como seria tu
                         sitio web ideal para tu negocio o emprendimiento, y si quieres ver más proyectos como este puedes visitar mi
                         github
@@ -529,7 +540,7 @@
                 </div>
                 <div class="icons-container dev-icons">
                     <a href="https://github.com/Samuel1390" target="_blank" rel="noopener" aria-label="enlace al github de Samuel Nelo">
-                        <img loading="lazy" class="icon" height="64" width="64" alt="icono de github" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/github.svg" />
+                        <img loading="lazy" class="icon" height="48" width="48" alt="icono de github" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/github.svg" />
                     </a>
                     <!--
                         <a href="" target="_blank" rel="noopener">
@@ -537,7 +548,7 @@
                         </a>
                         -->
                         <a href="https://wa.me/+584125053991" target="_blank" aria-label="enlace al whatsapp de Samuel Nelo" rel="noopener">
-                            <img loading="lazy" class="icon" height="64" width="64" alt="icono de whatsapp" src="https://unpkg.com/simple-icons@v16/icons/whatsapp.svg" />
+                            <img loading="lazy" class="icon" height="48" width="48" alt="icono de whatsapp" src="https://unpkg.com/simple-icons@v16/icons/whatsapp.svg" />
                         </a>
                 </div>
             </div>
@@ -565,5 +576,4 @@
     <script type="module" src="scripts.js"></script>
     <script src="burger-menu.js"></script>
 </body>
-
 </html>

@@ -10,7 +10,7 @@ body{
     box-sizing: border-box;
 }
 /* focus para accesibilidad */
-*:focus-visible {
+*:not(input):focus-visible {
     outline: 3px solid #0056b3 !important;
     outline-offset: 2px !important;
     box-shadow: 0 0 0 3px #0056b380 !important;
@@ -20,36 +20,51 @@ body{
 input:focus-visible,
 button:focus-visible,
 select:focus-visible {
+    background-image: initial;
     border-color: #0056b3 !important;
 }
 
+/* En la sección de .section-container-div (alrededor de la línea 10) */
 .section-container-div {
     width: 100%;
-    max-width: 1800px;
+    max-width: 1400px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr;
     place-content: center;
     column-gap: 20px;
-}
-@media screen and (max-width: 800px) {
-    .section-container-div {
-        grid-template-columns: 1fr;
-    }
+    padding: 20px;
 }
 .section-container {
-    position: relative;
-    z-index: 10;
     width: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+    .section-container-div {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (max-width: 600px) {
+    .section-container-div {
+        grid-template-columns: 70%;
+        padding: 10px; 
+        gap: 20px; 
+    }
+    .section-container {
+        max-width: 100% !important;
+    }
+    #main {
+        overflow-x: hidden;
+    }
 }
 .title {
     font-size: 1.5rem;
 }
 
 #main {
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: conter;
+    align-items: center;
     margin-top: 100px;
     flex-direction: column;
 }
@@ -109,7 +124,7 @@ input:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 40px;
     width: 100%;
     max-width: 1400px;
     gap: 20px;
@@ -124,8 +139,8 @@ input:focus {
 
 .logo {
     border-radius: 100%;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
 }
 
 /* Controles principales siempre visibles */
@@ -178,15 +193,15 @@ input:focus {
 
 /* Estilos para controles de color */
 .color-controls-container {
+    
     display: flex;
     gap: 10px;
     align-items: center;
 }
 
 #switch-button {
-    scale: 1.1;
     border-radius: 100%;
-    padding: 10px 12px;
+    padding: .25rem .3rem;
     background: none;
     border: 2px solid #333;
     display: flex;
@@ -206,26 +221,27 @@ input:focus {
     border-radius: 10px;
     overflow: hidden;
     border: 2px solid #333;
-    height: 45px;
+    height: 2.2rem;
     gap: 3px;
     align-items: center;
     flex-shrink: 0;
 }
 
 .color-control > input {
-    width: 150px;
+    height: 100%;
     text-align: center;
     font-size: 1rem;
-    padding: 0 10px;
+    max-width: 8rem;
 }
 
 .color-indicator {
-    width: 35px;
-    height: 35px;
+    cursor: pointer;
+    width: 1.8rem;
+    height: 1.8rem;
     background-color: #000;
     border: 1px solid #555;
     border-radius: 100%;
-    margin: 0 5px;
+    margin: 0 2px;
 }
 
 .color-picker-wrapper {
@@ -255,7 +271,7 @@ input:focus {
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding: 0 12px;
+    padding: 7px 7px;
     background-color: #f0f0f0;
     border-radius: 0 8px 8px 0;
 }
@@ -264,11 +280,9 @@ input:focus {
     background: linear-gradient(135deg, #000, #444);
     color: #fff;
     border-radius: 10px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     box-shadow: 0 0 20px #222;
-    padding: 10px 20px;
-    height: 45px;
-    min-width: 120px;
+    padding: 10px 18px;
     transition: all 0.3s;
     white-space: nowrap;
 }
@@ -289,16 +303,17 @@ input:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 150px;
+    min-width: 120px;
 }
 .ratio-indicator-div > div {
     display: flex;
     align-items: end;
 }
 
-.ratio-indicator-div h2 {
-    font-size: 1.1rem;
+.ratio-indicator-div h3 {
+    font-size: 1rem;
     white-space: nowrap;
+    margin-left: .3rem;
 }
 
 #select-main-elemets {
@@ -313,8 +328,8 @@ input:focus {
 }
 
 #format-control {
-    width: 60px;
-    height: 45px;
+    width: 2.5rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -328,7 +343,7 @@ input:focus {
 }
 
 #format-control:hover {
-    background-color: #f0f0f0;
+    background-color: #ddd;
 }
 
 /* Menú desplegable móvil */
@@ -387,17 +402,18 @@ input:focus {
 /* Secciones generales */
 .section-container {
     max-width: 1200px;
-    margin: 30px auto;
-    padding: 30px;
+    margin: 8px auto;
+    padding: 15px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
 }
 
 .section-header {
+    border-radius: 15px;
     text-align: center;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
     border-bottom: 2px solid currentColor;
 }
 
@@ -519,37 +535,6 @@ input:focus {
     }
 }
 
-/*        SECCION DE ACERCA DEL DESARROLLADOR          */
-
-.developer-section {
-    border-radius: 15px;
-    height: 100%;
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 30px;
-}
-.developer-section > img {
-    width: 200px;
-    height: 200px;
-    border-radius: 100%;
-    border: 2px solid currentColor;
-}
-.developer-text {
-    text-align: center;
-}
-.dev-icons {
-    margin: 0;
-    padding: 0;
-    gap: 40px;
-    height: 50px;
-}
-.dev-icons > a{
-    margin: 10px;
-}
-
 /* MEDIA QUERIES PARA HEADER RESPONSIVO */
 
 /* pantallas grandes (escritorio) */
@@ -588,7 +573,7 @@ input:focus {
     }
     
     .color-control {
-        min-width: 180px;
+        min-width: 10rem !important;
     }
     
     .color-control > input {
@@ -638,14 +623,7 @@ input:focus {
     }
     
     #switch-button {
-        padding: 8px 10px;
-    }
-    
-    .random-button {
-        padding: 8px 15px;
-        height: 40px;
-        min-width: 100px;
-        font-size: 1rem;
+        padding: 6px 8px;
     }
     
     .dropdown-menu {
@@ -715,8 +693,7 @@ input:focus {
     }
     
     .random-button {
-        width: 100%;
-        max-width: 200px;
+        font-size: 0.9rem;
         margin-top: 5px;
     }
     
@@ -733,24 +710,6 @@ input:focus {
     }
 }
 
-/* media queries para secciones generales */
-@media (max-width: 768px) {
-    .header-container {
-        width: 100%;
-    }
-    #main {
-        margin-top: 180px;
-        display: flex ;
-        justify-content: center ;
-        align-items: center ;
-    }
-    .section-header h2 {
-        font-size: 1.8rem;
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-}
 
 /* Ajustes para pantallas muy pequeñas */
 @media (max-width: 360px) {
@@ -769,7 +728,7 @@ input:focus {
     
     .random-button {
         font-size: 0.9rem;
-        padding: 6px 12px;
+        padding: 10px 12px;
     }
 }
 @media (prefers-reduced-motion: reduce) {
