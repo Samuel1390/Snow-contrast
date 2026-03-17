@@ -1,0 +1,52 @@
+/* ESTILOS DE DEVELOPER SECTION */
+.developer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    gap: 15px;
+    height: 100%;
+}
+.developer-section > h2 {
+    font-size: 2rem;
+    border-bottom: 2px solid currentColor;
+}
+.developer-section > img {
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+    border: 2px solid currentColor;
+}
+
+.developer-text p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.dev-icons {
+    display: flex;
+    flex-direction: row;
+    bottom: auto;
+    padding: 0;
+}
+
+@media screen and (max-width: 480px) {
+    .developer-section {
+        padding: 12px;
+        gap: 10px;
+    }
+    .developer-section > h2 {
+        font-size: 1.3rem;
+    }
+    .developer-section > img {
+        width: 130px;
+        height: 130px;
+    }
+    .developer-text p {
+        font-size: 0.9rem;
+        margin: 6px 0;
+    }
+}

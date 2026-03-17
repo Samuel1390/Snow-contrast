@@ -1,0 +1,186 @@
+/* ESTILOS PARA LA SECCIÓN DE GRÁFICO CIRCULAR */
+.chart-container {
+    border-radius: 20px;
+    background-color: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 20px;
+    height: 100%;
+}
+
+.chart-header {
+    margin-bottom: 30px;
+}
+
+.chart-header h2 {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.chart-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+
+/* Gráfico circular */
+.circular-chart {
+    width: 160px;
+    height: 160px;
+}
+
+.circular-chart-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 3.8;
+}
+
+.circle-progress {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 1s ease-out, stroke 0.5s ease;
+}
+
+.chart-value {
+    font-size: 8px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    transition: fill 0.5s ease;
+}
+
+.chart-label {
+    font-size: 4px;
+    opacity: 0.6;
+}
+
+/* Leyenda */
+.chart-legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 350px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #555;
+    text-align: left;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Información adicional */
+.chart-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: left;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.info-item .material-symbols-outlined {
+    color: #666;
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+.info-item p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+.info-item strong {
+    color: #333;
+}
+
+@media (min-width: 768px) {
+    .chart-wrapper {
+        flex-direction: row;
+        justify-content: center;
+        gap: 50px;
+    }
+    
+    .chart-legend {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: none;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .chart-container {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+    .chart-header {
+        margin-bottom: 15px;
+    }
+    .chart-header h2 {
+        font-size: 1rem;
+        gap: 6px;
+    }
+    .circular-chart {
+        width: 120px;
+        height: 120px;
+    }
+    .chart-wrapper {
+        gap: 15px;
+        margin: 15px 0;
+    }
+    .chart-legend {
+        gap: 8px;
+    }
+    .legend-item {
+        font-size: 0.8rem;
+        gap: 6px;
+    }
+    .legend-color {
+        width: 12px;
+        height: 12px;
+    }
+    .chart-info {
+        gap: 10px;
+        margin-top: 15px;
+        padding-top: 12px;
+    }
+    .info-item p {
+        font-size: 0.82rem;
+    }
+}

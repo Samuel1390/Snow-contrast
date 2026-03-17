@@ -1,5 +1,25 @@
 import Color from "./color.js";
 
+// Component imports
+import { renderLogin, initLoginLogic } from "./components/login/login.js";
+import { renderMusicPlayer, initMusicPlayerLogic } from "./components/music-player/music-player.js";
+import { renderCalendar, initCalendarLogic } from "./components/calendar/calendar.js";
+import { renderSuggestions, initSuggestionsLogic } from "./components/suggestions/suggestions.js";
+import { renderChart, updateCircularChart } from "./components/chart/chart.js";
+import { renderDeveloper, initDeveloperLogic } from "./components/developer/developer.js";
+
+// Inject dynamic components into the DOM
+const dynamicContainer = document.getElementById('dynamic-components-container');
+if (dynamicContainer) {
+    dynamicContainer.innerHTML = 
+        renderLogin() +
+        renderMusicPlayer() +
+        renderCalendar() +
+        renderSuggestions() +
+        renderChart() +
+        renderDeveloper();
+}
+
 // Elementos del DOM
 const inputTextColor_1 = document.getElementById('input-color-1');
 const inputTextColor_2 = document.getElementById('input-color-2');
@@ -22,11 +42,6 @@ const sugetionButtonsLabels = document.querySelectorAll('.sugestion-name')
 const sugestionButtons = document.querySelectorAll('.sugestions-item')
 const formatControlMobile = document.getElementById('format-control-mobile');
 const playListScrollbar = document.querySelector('.playlist')
-const passwordVisibleButton = document.getElementById('showPassword')
-const chartProgress = document.querySelector('.circle-progress');
-const chartValue = document.querySelector('.chart-value');
-const colorPikerLabel_1 = colorIndicator_1.parentElement.querySelector('.color-picker-label')
-const colorPikerLabel_2 = colorIndicator_2.parentElement.querySelector('.color-picker-label')
 
 // FUNCIONES SECUNDARIAS
 function getContrast(color_1, color_2) {
@@ -41,30 +56,6 @@ function getContrast(color_1, color_2) {
         console.error('error de formato en getContrast: ' + e)
     }
     
-}
-function getTime() {
-    //funcion para actualizar la fecha del calendario
-    const weekDate = new Date().getDay()
-    const day = new Date().getDate()
-    const month = new Date().getMonth() + 1 // ojo aca, los meses empiezan en 0
-    const year = new Date().getFullYear()
-    
-    timeSpan.textContent = `${day}/${month}/${year}`
-    // obtiene el string del indice del dia de la semana
-    daySpan.textContent = getWeekDayString(weekDate)
-}
-
-function getWeekDayString(number) {
-    switch (number) {
-        case 0: return 'Domingo';
-        case 1: return 'Lunes';
-        case 2: return 'Martes';
-        case 3: return 'Miércoles';
-        case 4: return 'Jueves';
-        case 5: return 'Viernes';
-        case 6: return 'Sábado';
-        default: return '(error al cargar el dia actual)';
-    }
 }
 
 function refresh() {
@@ -197,39 +188,6 @@ function firstDark_afterLight(color_1, color_2) {
     }
     return [darkColor, lightColor]
 }
-
-// funcion que actualiza el valor del circulo de radio
-function updateCircularChart(ratio) {
-    if (!chartProgress || !chartValue) return;
-    
-    // el ratio máximo es 21:1 (contraste máximo posible)
-    const maxRatio = 21;
-    // calculamos el porcentaje (limitamos a 100%)
-    let percentage = Math.min((ratio / maxRatio) * 100, 100);
-
-    const circumference = 100; // 100% del círculo
-    const dashArray = `${percentage}, ${circumference}`;
-    chartProgress.style.strokeDasharray = dashArray;
-    
-    // actualizamos el texto
-    chartValue.textContent = ratio;
-    
-    // Cambiamos el color del círculo según el ratio
-    let progressColor;
-    if (ratio >= 9) {
-        progressColor = '#00a352ff'; // verde para excelente
-    } else if (ratio >= 6 && ratio < 9) {
-        progressColor = '#b8d432'; // verde amarillento para bien
-    } else if (ratio >= 4.5 && ratio < 6) {
-        progressColor = '#ffcc00'; // Amarillo para aceptable
-    } else {
-        progressColor = '#ff4d4d'; // rojo para muy bajo
-    }
-    
-    chartProgress.style.stroke = progressColor
-    chartValue.style.fill = progressColor;
-}
-
 // Modifica la función updateRatioIndicators para incluir el gráfico
 function updateRatioIndicators(ratio) {
     ratioIndicators.forEach(ratioI => {
@@ -536,29 +494,9 @@ inputColor_1.addEventListener('input', () => {
     (rgbvalue) ? updateColor(rgbvalue, color_2) : console.log('formato inválido')
 })
 
+const colorPikerLabel_1 = colorIndicator_1.parentElement.querySelector('.color-picker-label');
+const colorPikerLabel_2 = colorIndicator_2.parentElement.querySelector('.color-picker-label');
 
-passwordVisibleButton.addEventListener('click',()=> {
-    const password = document.getElementById('password')
-    const type = password.getAttribute('type')
-    if (type==='password') {
-        password.setAttribute('type', 'text')
-    } else if(type==='text') {
-        password.setAttribute('type', 'password')
-    }
-})
-sugetionButtonsLabels.forEach(button => {
-    button.addEventListener('click', () => {
-        const target = button.previousElementSibling
-        const [darkColorDiv, lightColorDiv] = target.children;
-        updateColor(darkColorDiv.style.backgroundColor, lightColorDiv.style.backgroundColor)
-    })
-})
-sugestionButtons.forEach(button=> {
-    button.addEventListener('click', ()=> {
-        const [darkColorDiv, lightColorDiv] = button.children;
-        updateColor(darkColorDiv.style.backgroundColor, lightColorDiv.style.backgroundColor)
-    })
-});
 colorIndicator_1.addEventListener('click', ()=> colorPikerLabel_1.click())
 colorIndicator_2.addEventListener('click', ()=> colorPikerLabel_2.click())
 if (formatControl) {
@@ -587,6 +525,12 @@ if (formatControlMobile) {
 }
 
 
-// Inicializar con colores aleatorios al cargar y fecha actual
-getTime()
+// Inicializar lógica de componentes
+initLoginLogic();
+initMusicPlayerLogic();
+initCalendarLogic();
+initSuggestionsLogic(updateColor);
+initDeveloperLogic();
+
+// Inicializar con colores aleatorios al cargar
 refresh()
